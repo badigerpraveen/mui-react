@@ -12,7 +12,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { margin } from "@mui/system";
-import UserComment from "./UserComment";
+import UserComment from "./UserComment"; 
+import moment from "moment";
 
 // const style = {
 //   position: "absolute",
@@ -52,6 +53,7 @@ function Comment() {
   const [editMessage, isEditSetMessage] = useState();
   const [isEditMessage, isSetEdtMessage] = useState(false);
   const [editId, isEditId] = useState();
+  const [time,setTime] = useState()
   //   const [open, setOpen] = React.useState(false);
   //   const handleOpen = () => setOpen(true);
   //   const handleClose = () => setOpen(false);
@@ -86,7 +88,7 @@ function Comment() {
       userMessage: message,
       userImg: userImg,
     };
-    debugger;
+    
     console.log(userData.userMessage, "userData");
     e.preventDefault();
     //  isSetMessage([...isMessage, userData]);
@@ -157,7 +159,9 @@ function Comment() {
                       />
                     }
                   </item>
-                  <item> {<b>juliusomo </b>} </item>
+                  <item> {<b>juliusomo </b>} </item> 
+                  <item>  {time}  </item> 
+                  {console.log(time,"time")}
                 </Grid>
                 <Grid item sx={2}>
                   <Button
@@ -274,6 +278,8 @@ function Comment() {
         isSetMessage={isSetMessage}
         isEditMessage={isEditMessage}
         isSetEdtMessage={isSetEdtMessage}
+        time={time}
+        setTime={setTime}
         //userData={userData}
       />
     </>

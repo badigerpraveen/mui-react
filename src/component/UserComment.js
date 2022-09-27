@@ -2,6 +2,7 @@ import { Button, TextField } from "@mui/material";
 import React from "react";
 import userImg from "../images/avatars/image-juliusomo.png";
 import { Grid } from "@mui/material";
+import moment from "moment";
 
 function UserComment({
   message,
@@ -9,7 +10,9 @@ function UserComment({
   isMessage,
   isSetMessage,
   //userData,
-  //isEditMessage,
+  //isEditMessage, 
+  time,
+  setTime,
 }) {
 
     
@@ -18,10 +21,12 @@ function UserComment({
         id: isMessage.length + 1,
         userMessage: message,
         userImg: userImg,
-      };  
+        time:time,
+      };   
      // console.log(userData.userMessage,"userData");  
     e.preventDefault();
     isSetMessage([...isMessage, userData]);
+    setTime(moment().startOf('hour').fromNow())
     setMessage("");
    // isEditMessage(false);
   };
