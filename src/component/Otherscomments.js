@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import othrscomments from "./data.json";
 import { Button, Grid, TextField } from "@mui/material";
 import ReplySharpIcon from "@mui/icons-material/ReplySharp";
@@ -15,7 +15,7 @@ function Otherscomments() {
   return (
     <>
       {othrscomments.comments.map((content) => {
-       // console.log(content.content, "content");
+      
         return (
           <>
             <Grid

@@ -9,26 +9,21 @@ function UserComment({
   setMessage,
   isMessage,
   isSetMessage,
-  //userData,
-  //isEditMessage, 
   time,
   setTime,
 }) {
-
-    
-  const onSubmit = (e) => { 
+  const onSubmit = (e) => {
     const userData = {
-        id: isMessage.length + 1,
-        userMessage: message,
-        userImg: userImg,
-        time:time,
-      };   
-     // console.log(userData.userMessage,"userData");  
+      id: isMessage.length + 1,
+      userMessage: message,
+      userImg: userImg,
+      time: time,
+    };
+
     e.preventDefault();
     isSetMessage([...isMessage, userData]);
-    setTime(moment().startOf('hour').fromNow())
+    setTime(moment().startOf("hour").fromNow());
     setMessage("");
-   // isEditMessage(false);
   };
   const oninputChange = (e) => {
     setMessage(e.target.value);
