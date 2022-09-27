@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 import { useState } from "react";
-
+import moment from "moment";
 import Otherscomments from "./Otherscomments";
 import { Grid } from "@mui/material";
 
@@ -44,7 +44,7 @@ function Comment() {
       const editMsgNew = isMessage.find((item) => {
         return item.id === editId;
       });
-
+      
       isSetMessage(
         isMessage.map((i) => {
           console.log(editMessage, "editMessage.userMessage");
@@ -68,12 +68,12 @@ function Comment() {
   const oninputChangeEdit = (e) => {
     isEditSetMessage(e.target.value);
   };
-
+  
   return (
     <>
       <div className="over">
         <Otherscomments />
-
+       {console.log(isMessage,"isMessage")}
         {isMessage &&
           isMessage.map((i) => {
             return (
@@ -96,9 +96,10 @@ function Comment() {
                         height="auto"
                       />
                     }
-                  </item>
+                  </item> 
+                  
                   <item> {<b>juliusomo </b>} </item>
-                  <item> {time} </item>
+                  <item>  {i.date} {moment(i.date).fromNow()} </item>
                 </Grid>
                 <Grid item sx={2}>
                   <Button

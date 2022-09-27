@@ -27,7 +27,7 @@ function Otherscomments() {
               borderRadius={3}
             >
               <Grid item xs={10} display="flex" gap={2}> 
-                {console.log(content.user.image.png,"content.user.image.png")}
+              
                 <img src={content.user.image.png} alt="img" />
                 <b> {content.user.username} </b> 
                
@@ -72,7 +72,7 @@ function Otherscomments() {
           </>
         );
       })}
-      {console.log(othrscomments.comments)}
+      
     </>
   );
 }
