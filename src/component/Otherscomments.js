@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import othrscomments from "./data.json";
 import { Button, Grid, TextField } from "@mui/material";
 import ReplySharpIcon from "@mui/icons-material/ReplySharp";
@@ -15,7 +15,7 @@ function Otherscomments() {
   return (
     <>
       {othrscomments.comments.map((content) => {
-       // console.log(content.content, "content");
+      
         return (
           <>
             <Grid
@@ -27,7 +27,7 @@ function Otherscomments() {
               borderRadius={3}
             >
               <Grid item xs={10} display="flex" gap={2}> 
-                {console.log(content.user.image.png,"content.user.image.png")}
+              
                 <img src={content.user.image.png} alt="img" />
                 <b> {content.user.username} </b> 
                
@@ -72,7 +72,7 @@ function Otherscomments() {
           </>
         );
       })}
-      {console.log(othrscomments.comments)}
+      
     </>
   );
 }
