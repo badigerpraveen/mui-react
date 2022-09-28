@@ -4,8 +4,6 @@ import userImg from "../images/avatars/image-juliusomo.png";
 import { Grid } from "@mui/material";
 import moment from "moment";
 
-const date = moment().format('MMMM Do YYYY, h:mm:ss a')
-
 function UserComment({
   message,
   setMessage,
@@ -14,15 +12,21 @@ function UserComment({
   time,
   setTime,
 }) {
+  const messageId = (a = isMessage.length) => {
+    if (a === 0) {
+      return 0;
+    } else {
+      return isMessage[isMessage.length - 1].id;
+    }
+  };
+
   const onSubmit = (e) => {
     const userData = {
-      id: isMessage.length + 1,
+      id: messageId() + 1,
       userMessage: message,
       userImg: userImg,
-    //  time: moment().startOf('hour').fromNow(), 
-     date: moment().format('MM DD YYYY, h:mm:ss a'),
+      date: moment().format("MM DD YYYY, h:mm:ss a"),
     };
-    
 
     e.preventDefault();
     isSetMessage([...isMessage, userData]);
