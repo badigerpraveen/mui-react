@@ -19,9 +19,7 @@ function Comment() {
   const [time, setTime] = useState();
 
   const deletMessag = (id) => {
-    console.log(id, "ID onclick");
     const deletMessage = isMessage.filter((msgId) => {
-      console.log(msgId.id, "msgId.id", id, "id");
       return msgId.id !== id;
     });
     isSetMessage(deletMessage);
@@ -31,7 +29,6 @@ function Comment() {
     isSetEdtMessage(!isEditMessage);
     isEditId(id);
     const editMsg = isMessage.find((editMsgId) => {
-      console.log(editMsgId.id);
       return editMsgId.id === id;
     });
     isEditSetMessage(editMsg.userMessage);
@@ -44,10 +41,9 @@ function Comment() {
       const editMsgNew = isMessage.find((item) => {
         return item.id === editId;
       });
-      
+
       isSetMessage(
         isMessage.map((i) => {
-          console.log(editMessage, "editMessage.userMessage");
           return i.id === editMsgNew.id
             ? {
                 id: i.id,
@@ -68,12 +64,12 @@ function Comment() {
   const oninputChangeEdit = (e) => {
     isEditSetMessage(e.target.value);
   };
-  
+
   return (
     <>
       <div className="over">
         <Otherscomments />
-       {console.log(isMessage,"isMessage")}
+
         {isMessage &&
           isMessage.map((i) => {
             return (
@@ -96,10 +92,10 @@ function Comment() {
                         height="auto"
                       />
                     }
-                  </item> 
-                  
+                  </item>
+
                   <item> {<b>juliusomo </b>} </item>
-                  <item>  {i.date} {moment(i.date).fromNow()} </item>
+                  <item> {moment(i.date).fromNow()} </item>
                 </Grid>
                 <Grid item sx={2}>
                   <Button
