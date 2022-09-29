@@ -7,7 +7,6 @@ import { useState } from "react";
 import moment from "moment";
 import Otherscomments from "./Otherscomments";
 import { Grid } from "@mui/material";
-
 import UserComment from "./UserComment";
 
 function Comment() {
@@ -75,6 +74,7 @@ function Comment() {
             return (
               <Grid
                 container
+                width={"98%"}
                 spacing={2}
                 bgcolor="white"
                 p={1}
@@ -82,7 +82,7 @@ function Comment() {
                 marginLeft="10px"
                 borderRadius={3}
               >
-                <Grid item xs={9} display="flex" gap={2}>
+                <Grid item sm={8} display="flex" gap={2}>
                   <item>
                     {
                       <img
@@ -97,7 +97,7 @@ function Comment() {
                   <item> {<b>juliusomo </b>} </item>
                   <item> {moment(i.date).fromNow()} </item>
                 </Grid>
-                <Grid item sx={2}>
+                <Grid item sm={4}>
                   <Button
                     variant="text"
                     color="error"
@@ -124,10 +124,10 @@ function Comment() {
                     {isEditMessage && editId === i.id ? "Cancel" : "Edit"}
                   </Button>
                 </Grid>
-                <Grid item sx={6}>
+                <Grid item sm={12}>
                   {i.userMessage}
                 </Grid>
-                <Grid item xs={11} p={1}>
+                <Grid item sm={12} p={1}>
                   {isEditMessage && editId === i.id ? (
                     <form onSubmit={onEditSubmit}>
                       <TextField
@@ -140,7 +140,7 @@ function Comment() {
                       />
                       <Button
                         type="submit"
-                        style={{ marginTop: "10px" }}
+                        style={{ marginTop: "10px" , float:"right", background:"#5457b6" }}
                         variant="contained"
                       >
                         Update

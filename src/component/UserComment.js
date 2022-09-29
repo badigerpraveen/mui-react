@@ -1,8 +1,9 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextareaAutosize  } from "@mui/material";
 import React from "react";
 import userImg from "../images/avatars/image-juliusomo.png";
 import { Grid } from "@mui/material";
-import moment from "moment";
+import moment from "moment"; 
+
 
 function UserComment({
   message,
@@ -40,28 +41,31 @@ function UserComment({
     <>
       <form onSubmit={onSubmit}>
         <Grid
-          container
+          container 
           spacing={2}
           bgcolor="white"
+          width="99%"
           p={1}
           m={1}
           borderRadius={3}
         >
-          <Grid item sx={1}>
+          <Grid item sm={1}>
             <img src={userImg} alt="img" width="40px" height="auto" />
           </Grid>
-          <Grid item xs={9}>
-            <TextField
+          <Grid item sm={9}>
+            <TextareaAutosize 
+             
               type="text"
               name="message"
               value={message}
-              fullWidth
+              minRows={4} 
+              style={{ width: '100%' }}
               placeholder="Add a comment"
               onChange={oninputChange}
             />{" "}
           </Grid>
-          <Grid item sx={1}>
-            <Button type="submit" variant="contained" fullWidth>
+          <Grid item sm={1}>
+            <Button type="submit" variant="contained" style={{background:"#5457b6"}} >
               Send
             </Button>
           </Grid>

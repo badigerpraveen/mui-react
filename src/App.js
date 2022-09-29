@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 
 function App() {
   return (
-    <Container sx={{ width: 900 }}>
+    <Container maxWidth="md">
       <Comment />
     </Container>
   );
