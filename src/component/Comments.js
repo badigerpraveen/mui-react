@@ -3,20 +3,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import moment from "moment";
 import Otherscomments from "./Otherscomments";
 import { Grid } from "@mui/material";
-
 import UserComment from "./UserComment";
 
 function Comment() {
-  const [message, setMessage] = useState();
-  const [isMessage, isSetMessage] = useState([]);
+  const [message, setMessage] = useState(); 
+  const [isMessage, isSetMessage] = useState(JSON.parse(localStorage.getItem('isMessage')) || ""); 
   const [editMessage, isEditSetMessage] = useState();
   const [isEditMessage, isSetEdtMessage] = useState(false);
   const [editId, isEditId] = useState();
   const [time, setTime] = useState();
+
+  useEffect(() => {
+    localStorage.setItem('isMessage', JSON.stringify(isMessage));
+  }, [isMessage]); 
+
 
   const deletMessag = (id) => {
     const deletMessage = isMessage.filter((msgId) => {
@@ -75,6 +79,7 @@ function Comment() {
             return (
               <Grid
                 container
+                width={"98%"}
                 spacing={2}
                 bgcolor="white"
                 p={1}
@@ -82,7 +87,7 @@ function Comment() {
                 marginLeft="10px"
                 borderRadius={3}
               >
-                <Grid item xs={9} display="flex" gap={2}>
+                <Grid item sm={8} display="flex" gap={2}>
                   <item>
                     {
                       <img
@@ -97,7 +102,7 @@ function Comment() {
                   <item> {<b>juliusomo </b>} </item>
                   <item> {moment(i.date).fromNow()} </item>
                 </Grid>
-                <Grid item sx={2}>
+                <Grid item sm={4}>
                   <Button
                     variant="text"
                     color="error"
@@ -124,10 +129,10 @@ function Comment() {
                     {isEditMessage && editId === i.id ? "Cancel" : "Edit"}
                   </Button>
                 </Grid>
-                <Grid item sx={6}>
+                <Grid item sm={12}>
                   {i.userMessage}
                 </Grid>
-                <Grid item xs={11} p={1}>
+                <Grid item sm={12} p={1}>
                   {isEditMessage && editId === i.id ? (
                     <form onSubmit={onEditSubmit}>
                       <TextField
@@ -140,7 +145,7 @@ function Comment() {
                       />
                       <Button
                         type="submit"
-                        style={{ marginTop: "10px" }}
+                        style={{ marginTop: "10px" , float:"right", background:"#5457b6" }}
                         variant="contained"
                       >
                         Update
