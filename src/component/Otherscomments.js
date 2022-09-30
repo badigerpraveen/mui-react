@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import othrscomments from "./data.json";
 import { Button,  TextareaAutosize } from "@mui/material";
 import ReplySharpIcon from "@mui/icons-material/ReplySharp";
@@ -12,7 +12,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import ReplayEdit from "./ReplayEdit";
 function Otherscomments() {
   const [replyCmt, setreplyCmt] = useState();
-  const [isreplyCmt, isSetOthersCmt] = useState([]);
+  const [isreplyCmt, isSetOthersCmt] = useState(JSON.parse(localStorage.getItem('isreplyCmt')) || "");
   const [repalyEditMessage, isreplayEditSetMessage] = useState();
   const [isEditMessage, isSetEdtMessage] = useState(false);
   const [isEditReplayMessage, isSetEdtReplayMessage] = useState(false);
@@ -20,6 +20,12 @@ function Otherscomments() {
   const [isEditReplyeditId, isEditSetReplyeditId] = useState();
   const [othersId, setOthersId] = useState();
 
+  useEffect(() => {
+    localStorage.setItem('isreplyCmt', JSON.stringify(isreplyCmt));
+  }, [isreplyCmt]); 
+
+ 
+ 
   const replyComment = (id) => {
     isSetEdtMessage(!isEditMessage);
     isSetReplyeditId(id);
@@ -36,8 +42,8 @@ function Otherscomments() {
     isreplayEditSetMessage(repalyEditMsg.replyMessage);
   };
 
-  const messageId = (a = isreplyCmt.length) => {
-    if (a === 0) {
+  const isreplyCmtId = (isreplyCmtId = isreplyCmt.length) => {
+    if (isreplyCmtId === 0) {
       return 0;
     } else {
       return isreplyCmt[isreplyCmt.length - 1].id;
@@ -46,7 +52,7 @@ function Otherscomments() {
 
   const replySubmit = (e) => {
     const replayData = {
-      id: messageId() + 1,
+      id: isreplyCmtId() + 1,
       replyMessage: replyCmt,
       userImg: userImg,
       date: moment().format("MM DD YYYY, h:mm:ss a"),

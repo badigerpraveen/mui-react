@@ -3,7 +3,7 @@ import React from "react";
 import userImg from "../images/avatars/image-juliusomo.png";
 import { Grid } from "@mui/material";
 import moment from "moment"; 
-
+import {useEffect} from "react"
 
 function UserComment({
   message,
@@ -12,9 +12,15 @@ function UserComment({
   isSetMessage,
   time,
   setTime,
-}) {
-  const messageId = (a = isMessage.length) => {
-    if (a === 0) {
+}) { 
+
+  useEffect(() => {
+    localStorage.setItem('isMessage', JSON.stringify(isMessage));
+  }, [isMessage]); 
+
+
+  const messageId = (userMassageid = isMessage.length) => {
+    if (userMassageid === 0) {
       return 0;
     } else {
       return isMessage[isMessage.length - 1].id;

@@ -3,19 +3,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import moment from "moment";
 import Otherscomments from "./Otherscomments";
 import { Grid } from "@mui/material";
 import UserComment from "./UserComment";
 
 function Comment() {
-  const [message, setMessage] = useState();
-  const [isMessage, isSetMessage] = useState([]);
+  const [message, setMessage] = useState(); 
+  const [isMessage, isSetMessage] = useState(JSON.parse(localStorage.getItem('isMessage')) || ""); 
   const [editMessage, isEditSetMessage] = useState();
   const [isEditMessage, isSetEdtMessage] = useState(false);
   const [editId, isEditId] = useState();
   const [time, setTime] = useState();
+
+  useEffect(() => {
+    localStorage.setItem('isMessage', JSON.stringify(isMessage));
+  }, [isMessage]); 
+
 
   const deletMessag = (id) => {
     const deletMessage = isMessage.filter((msgId) => {
