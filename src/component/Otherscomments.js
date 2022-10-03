@@ -10,8 +10,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Unstable_Grid2";
 import ReplayEdit from "./ReplayEdit";
-function Otherscomments() {
-  const [replyCmt, setreplyCmt] = useState();
+function Otherscomments() { 
+  const intilaValues = {replyMessage:""}
+  const [replyCmt, setreplyCmt] = useState(intilaValues); 
+  const [errorReplyCmt, setErrorReplyCmt] = useState({}); 
   const [isreplyCmt, isSetOthersCmt] = useState(JSON.parse(localStorage.getItem('isreplyCmt')) || "");
   const [repalyEditMessage, isreplayEditSetMessage] = useState();
   const [isEditMessage, isSetEdtMessage] = useState(false);
@@ -53,19 +55,26 @@ function Otherscomments() {
   const replySubmit = (e) => {
     const replayData = {
       id: isreplyCmtId() + 1,
-      replyMessage: replyCmt,
+      replyMessage: replyCmt.replyMessage,
       userImg: userImg,
       date: moment().format("MM DD YYYY, h:mm:ss a"),
       username: "juliusomo",
       othersId: othersId,
     };
-    e.preventDefault();
-    isSetOthersCmt([...isreplyCmt, replayData]);
-    setreplyCmt("");
-    isSetEdtMessage(!isEditMessage);
+    e.preventDefault(); 
+
+    if(replyCmt.replyMessage){
+      isSetOthersCmt([...isreplyCmt, replayData]); 
+     // isSetEdtMessage(!isEditMessage); 
+    }
+   
+    setreplyCmt({replyMessage:""});
+    
+    setErrorReplyCmt(validate(replyCmt));
   };
   const oninputReplayChange = (e) => {
-    setreplyCmt(e.target.value);
+    const { name, value } = e.target;
+    setreplyCmt({ ...replyCmt, [name]: value });
   };
 
   const deleteReply = (id) => {
@@ -74,12 +83,23 @@ function Otherscomments() {
     });
     isSetOthersCmt(replayDelete);
   };
+  
+  const validate = (value) => {
+    const error = {}; 
+    console.log(value,"value")
+    if (!value.replyCmt) {
+      error.replyCmt = "*! Reply Message Field is required , Write something.... ";
+    }else{
+      error.replyCmt= "";
+    }
+    return error;
+  };
 
   return (
     <>
       {othrscomments.comments.map((content) => {
-        return (
-          <>
+        return  ( 
+          <> 
             <Grid
               container
               spacing={2}
@@ -126,7 +146,7 @@ function Otherscomments() {
                 <p> {content.content} </p>
               </Grid>
 
-              {isEditMessage && isReplyeditId === content.id ? (
+              {isEditMessage && isReplyeditId === content.id ? ( 
                 <Grid item xs={12} gap={2}>
                   <form onSubmit={replySubmit}>
                     <TextareaAutosize
@@ -135,10 +155,11 @@ function Otherscomments() {
                       minRows={4}
                       style={{ width: "100%" }}
                       placeholder="Replay Message"
-                      value={replyCmt}
+                      value={replyCmt.replyMessage}
                       onChange={oninputReplayChange}
-                    />
-
+                    /> 
+                    {console.log(errorReplyCmt.replyCmt)}
+                   <p style={{ color: "red" }}>{errorReplyCmt.replyCmt} </p>
                     <Button
                       type="submit"
                       style={{

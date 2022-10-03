@@ -9,8 +9,10 @@ import Otherscomments from "./Otherscomments";
 import { Grid } from "@mui/material";
 import UserComment from "./UserComment";
 
-function Comment() {
-  const [message, setMessage] = useState(); 
+function Comment() { 
+  const intilaValues = {message:""}
+  const [message, setMessage] = useState(intilaValues);  
+  const [errorMessage, setErrorMessage] = useState({}); 
   const [isMessage, isSetMessage] = useState(JSON.parse(localStorage.getItem('isMessage')) || ""); 
   const [editMessage, isEditSetMessage] = useState();
   const [isEditMessage, isSetEdtMessage] = useState(false);
@@ -24,7 +26,7 @@ function Comment() {
 
   const deletMessag = (id) => {
     const deletMessage = isMessage.filter((msgId) => {
-      return msgId.id !== id;
+      return msgId.id !== id; 
     });
     isSetMessage(deletMessage);
   };
@@ -160,7 +162,9 @@ function Comment() {
           })}
       </div>
       <UserComment
-        message={message}
+        message={message} 
+        errorMessage={errorMessage} 
+        setErrorMessage={setErrorMessage}
         setMessage={setMessage}
         isMessage={isMessage}
         isSetMessage={isSetMessage}
